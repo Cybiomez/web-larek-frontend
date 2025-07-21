@@ -1,4 +1,4 @@
-# Проектная работа "Веб-ларек"
+# Проектная работа Веб-ларек
 
 Стек: HTML, SCSS, TS, Webpack
 
@@ -40,3 +40,42 @@ npm run build
 ```
 yarn build
 ```
+
+ItemsCollection: {
+    total: number,
+    items: object,
+
+    add_items_to_collection? (): function,
+    add_item_to_collection? (): function,
+    delete_item_from_collection? (): function,
+
+}
+
+Item  { 
+    id: string,
+    description: string,
+    image: string,
+    title: string,
+    category: string,
+    price: number || null,
+
+    show_card (): function,
+    add_to_order (): function,
+    delete_from_order (): function,
+}
+
+Order: {
+    id: string,
+    total: number,
+    items: array,
+    payment: string,
+    address: string,
+    email: string,
+    phone: string,
+
+    show_order (): function,
+    place_an_order (): function,
+    delete_item (): function,
+
+}
+
