@@ -4,8 +4,8 @@
 
 Структура проекта:
 - src/ — исходные файлы проекта
-- src/components/ — папка с JS компонентами
-- src/components/base/ — папка с базовым кодом
+- src/components/ — папка с TS компонентами
+- src/components/base/ — папка с базовым кодом ?
 
 Важные файлы:
 - src/pages/index.html — HTML-файл главной страницы
@@ -41,41 +41,83 @@ npm run build
 yarn build
 ```
 
-ItemsCollection: {
-    total: number,
-    items: object,
+## Данные и типы данных
 
-    add_items_to_collection? (): function,
-    add_item_to_collection? (): function,
-    delete_item_from_collection? (): function,
+Товар
 
-}
-
-Item  { 
-    id: string,
+```
+export interface IItem  { 
+    _id: string,
     description: string,
     image: string,
     title: string,
     category: string,
-    price: number || null,
+    price: number | null,
 
-    show_card (): function,
-    add_to_order (): function,
-    delete_from_order (): function,
+    show_card (): void,
+    add_to_order (): void,
+    delete_from_order (): void,
 }
+```
 
-Order: {
-    id: string,
+Заказ
+
+```
+export interface IOrder {
+    _id: string,
     total: number,
-    items: array,
+    items: IItem[],
     payment: string,
     address: string,
     email: string,
     phone: string,
 
-    show_order (): function,
-    place_an_order (): function,
-    delete_item (): function,
-
+    show_order (): void,
+    place_an_order (): void,
+    delete_item (): void,
 }
+```
 
+Коллекция товаров
+
+```
+export interface IItemsCollection {
+    total: number,
+    items: IItem[],
+    preview: string | null,
+
+    add_items_to_collection? (): void,
+    add_item_to_collection? (): void,
+    delete_item_from_collection? (): void,
+}
+```
+
+Данные товара в списке на главной странице
+
+```
+export type TItemPreview = Pick<IItem, 'image' | 'title' | 'category' | 'price'>;
+```
+
+Данные товара в модальном окне товара
+
+```
+export type TItemModal = Pick<IItem, 'description' |'image' | 'title' | 'category' | 'price'>;
+```
+
+Данные для списка товаров в корзине
+
+```
+export type TBasketModal = Pick<IItem, 'title' | 'price'>;
+```
+
+Данные формы первого этапа оформления заказа
+
+```
+export type TPaymentAndAddressModal = Pick<IOrder, 'payment' | 'address'>;
+```
+
+Данные формы второго этапа оформления заказа
+
+```
+export type TEmailAndPhoneModal = Pick<IOrder, 'email' | 'phone'>;
+```
